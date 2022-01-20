@@ -12,7 +12,7 @@ class APIController extends Controller
     public function home()
     {
         $aleas = Alea::has('catastrophes')
-            ->select('id', 'nom', 'url')
+            ->select('id', 'nom', 'url', 'image')
             ->get();
 
         $villes = Ville::has('catastrophes')
