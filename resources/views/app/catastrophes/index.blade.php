@@ -45,26 +45,38 @@
                             @lang('crud.common.create')
                         </a>
                         @endcan
+                            <a
+                                href="{{ route('catastrophe.excel.form') }}"
+                                class="btn btn-primary"
+                            >
+                                <i class="icon ion-md-add"></i>
+                                Fichier excel
+                            </a>
                     </div>
                 </div>
             </div>
+
+            @php $etat = ["Faible", "Moyen", "Haut"] @endphp
+            @php $couleurs = ["text-success", "text-orange", "text-danger"] @endphp
 
             <div class="table-responsive">
                 <table class="table table-borderless table-hover">
                     <thead>
                         <tr>
+                            <th class="text-left">
+                                @lang('crud.catastrophes.inputs.ville_id')
+                            </th>
+                            <th class="text-left">
+                                @lang('crud.catastrophes.inputs.alea_id')
+                            </th>
                             <th class="text-right">
                                 @lang('crud.catastrophes.inputs.valeur')
                             </th>
                             <th class="text-left">
                                 @lang('crud.catastrophes.inputs.url')
                             </th>
-                            <th class="text-left">
-                                @lang('crud.catastrophes.inputs.alea_id')
-                            </th>
-                            <th class="text-left">
-                                @lang('crud.catastrophes.inputs.ville_id')
-                            </th>
+
+
                             <th class="text-center">
                                 @lang('crud.common.actions')
                             </th>
@@ -73,7 +85,19 @@
                     <tbody>
                         @forelse($catastrophes as $catastrophe)
                         <tr>
-                            <td>{{ $catastrophe->valeur ?? '-' }}</td>
+                            <td>
+                                {{ optional($catastrophe->ville)->nom ?? '-' }}
+                            </td>
+                            <td>
+                                {{ optional($catastrophe->alea)->nom ?? '-' }}
+                            </td>
+                            <td>
+                                @if($catastrophe->valeur)
+                                    <label for="" class="label {{ $couleurs[$catastrophe->valeur - 1] }}">
+                                        {{ $etat[$catastrophe->valeur - 1] }}
+                                    </label>
+                                @endif
+                            </td>
                             <td>
                                 <a
                                     target="_blank"
@@ -81,12 +105,8 @@
                                     >{{ $catastrophe->url ?? '-' }}</a
                                 >
                             </td>
-                            <td>
-                                {{ optional($catastrophe->alea)->nom ?? '-' }}
-                            </td>
-                            <td>
-                                {{ optional($catastrophe->ville)->nom ?? '-' }}
-                            </td>
+
+
                             <td class="text-center" style="width: 134px;">
                                 <div
                                     role="group"

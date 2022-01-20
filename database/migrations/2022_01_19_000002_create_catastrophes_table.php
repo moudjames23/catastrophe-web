@@ -15,7 +15,7 @@ class CreateCatastrophesTable extends Migration
     {
         Schema::create('catastrophes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('valeur');
+            $table->integer('valeur')->nullable();
             $table->string('url')->nullable();
             $table->unsignedBigInteger('alea_id');
             $table->unsignedBigInteger('ville_id');

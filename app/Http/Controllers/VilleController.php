@@ -21,7 +21,7 @@ class VilleController extends Controller
 
         $villes = Ville::search($search)
             ->latest()
-            ->paginate(5)
+            ->paginate(50)
             ->withQueryString();
 
         return view('app.villes.index', compact('villes', 'search'));

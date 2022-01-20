@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExcelCatastropheController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,11 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
 
-Auth::routes();
+Auth::routes([
+    'register' => false
+]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -28,7 +29,14 @@ Route::prefix('/')
         Route::resource('permissions', 'PermissionController');
 
         Route::resource('users', UserController::class);
+
+
         Route::resource('catastrophes', CatastropheController::class);
+
+        Route::get('excel/catastrophes', [ExcelCatastropheController::class, 'form'])->name('catastrophe.excel.form');
+        Route::post('excel/catastrophes', [ExcelCatastropheController::class, 'import'])->name('catastrophe.excel.import');
+
         Route::resource('villes', VilleController::class);
+
         Route::resource('aleas', AleaController::class);
     });

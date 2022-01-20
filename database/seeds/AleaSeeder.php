@@ -19,11 +19,11 @@ class AleaSeeder extends Seeder
           "Vent violent",
           "Orage",
           "Sécheresse",
-          "feux de brousse",
+          "Feu de brousse",
           "Glissement",
         ];
 
-        $url = "p.openstreetmap.fr/fr/map/organisation-des-femmes-et-des-jeunes-filles-leade_517884#12/9.5962/-13.6625";
+        $url = "https://umap.openstreetmap.fr/fr/map/cartes-des-risques_706209";
 
         for ($i = 0; $i < count($data); $i++)
         {

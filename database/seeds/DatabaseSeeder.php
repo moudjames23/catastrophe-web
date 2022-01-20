@@ -21,6 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AleaSeeder::class);
         //$this->call(CatastropheSeeder::class);
         //->call(UserSeeder::class);
-        //$this->call(VilleSeeder::class);
+        $this->call(VilleSeeder::class);
     }
 }

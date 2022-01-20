@@ -22,8 +22,7 @@ class CatastropheController extends Controller
         $search = $request->get('search', '');
 
         $catastrophes = Catastrophe::search($search)
-            ->latest()
-            ->paginate(5)
+            ->paginate(25)
             ->withQueryString();
 
         return view(
