@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Alerte;
+use Cornford\Googlmapper\Facades\MapperFacade as Mapper;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -15,6 +16,8 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
+
     }
 
     /**
@@ -28,6 +31,12 @@ class HomeController extends Controller
             ->latest()
             ->limit(10)
             ->get();
+
+
+        for($i = 0; $i < count($alertes); $i++)
+            Mapper::map($alertes[$i]['latitude'], $alertes[$i]['longitude'], [
+                'zoom' => 15
+            ]);
 
         return view('home', compact('alertes'));
     }

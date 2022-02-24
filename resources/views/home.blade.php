@@ -71,6 +71,9 @@
                                 Image
                             </th>
 
+                            <th class="text-left">
+                                Lat / Long
+                            </th>
 
 
                             <th class="text-center">
@@ -107,6 +110,10 @@
                                     />
                                 </td>
 
+                                <td>
+                                    {{ $alerte->latitude. ' / ' .$alerte->longitude }}
+                                </td>
+
                                 <td class="text-center" style="width: 134px;">
                                     <div
                                         role="group"
@@ -135,5 +142,29 @@
                 </div>
             </div>
         </div>
+
+
+
+
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <div style="display: flex; justify-content: space-between;">
+                    <h4 class="card-title">10 dernières alertes signalées</h4>
+                </div>
+
+
+                <div style="width: 500px; height: 500px;">
+                    {!! Mapper::render() !!}
+                </div>
+
+            </div>
+        </div>
+
+
+
+
     </div>
 @endsection
