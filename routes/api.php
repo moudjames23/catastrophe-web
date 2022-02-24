@@ -20,3 +20,5 @@ Route::get('home', [APIController::class, 'home']);
 Route::get('alea/{id}', [APIController::class, 'alea']);
 
 Route::get('ville/{id}', [APIController::class, 'ville']);
+
+Route::post('sync-alert', [APIController::class, 'sync']);

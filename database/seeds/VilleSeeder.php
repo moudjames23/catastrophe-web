@@ -17,10 +17,46 @@ class VilleSeeder extends Seeder
 
 
 
-        $villes = ['Boké','Kamsar', 'Coyah', 'Boffa','Koba', 'Dubréka', 'Forécariah', 'Fria', 'Kindia', 'Télimélé',
-            'Dalaba',  'Labé', 'Lélouma', 'Mali', 'Mamou', 'Pita', 'Koubia', 'Tougué', 'Gaoual',
-            'Kankan', 'Kérouane', 'Kouroussa','Koundara', 'Mandiana', 'Siguiri', 'Dabola', 'Dinguiraye', 'Faranah',
-            'Beyla', 'Guéckédou', 'Kissidougou', 'Lola', 'Macenta', 'Nzérékoré', 'Yomou'
+        $villes = [
+            "Beyla",
+            "Boffa",
+            "Boké",
+            "Coyah",
+            "Conakry",
+            "Dabola",
+            "Dalaba",
+            "Dinguiraye",
+            "Dixinn",
+            "Dubréka",
+            "Faranah",
+            "Forécariah",
+            "Fria",
+            "Gaoual",
+            "Guéckédou",
+            "Kaloum",
+            "Kankan",
+            "Kérouané",
+            "Kindia",
+            "Kissidougou",
+            "Koubia",
+            "Koundara",
+            "Kouroussa",
+            "Labé",
+            "Lélouma",
+            "Lola",
+            "Macenta",
+            "Mali",
+            "Mamou",
+            "Mandiana",
+            "Matam",
+            "Matoto",
+            "Nzérékoré",
+            "Pita",
+            "Ratoma",
+            "Siguiri",
+            "Télimélé",
+            "Tougué",
+            "Yomou"
         ];
 
 

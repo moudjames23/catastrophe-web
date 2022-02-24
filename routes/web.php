@@ -39,4 +39,6 @@ Route::prefix('/')
         Route::resource('villes', VilleController::class);
 
         Route::resource('aleas', AleaController::class);
+
+        Route::resource('agents', AgentController::class);
     });

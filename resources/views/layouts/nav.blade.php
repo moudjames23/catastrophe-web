@@ -24,6 +24,12 @@
                     </li>
 
                     <li class="nav-item">
+
+                            <a class="nav-link" href="{{ route('agents.index') }}">Agents</a>
+
+                    </li>
+
+                    <li class="nav-item">
                         @can('view-any', App\Models\Alea::class)
                             <a class="nav-link" href="{{ route('aleas.index') }}">Aléas</a>
                         @endcan
