@@ -8,16 +8,16 @@ class Alerte extends Model
 {
     public function agent()
     {
-        return $this->belongsTo('App\Agent');
+        return $this->belongsTo('App\Models\Agent');
     }
 
     public function ville()
     {
-        return $this->belongsTo('App\Ville');
+        return $this->belongsTo('App\Models\Ville');
     }
 
     public function alea()
     {
-        return $this->belongsTo('App\Alea');
+        return $this->belongsTo('App\Models\Alea');
     }
 }

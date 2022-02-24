@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alerte;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $alertes = Alerte::with(['agent', 'alea', 'ville'])
+            ->latest()
+            ->limit(10)
+            ->get();
+
+        return view('home', compact('alertes'));
     }
 }
