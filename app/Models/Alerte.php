@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Alerte extends Model
 {
+    protected $fillable = ['nom', 'url', 'image'];
+
+    protected $searchableFields = ['*'];
+
     public function agent()
     {
         return $this->belongsTo('App\Models\Agent');
@@ -23,6 +27,6 @@ class Alerte extends Model
 
     public function getMessageAttribute()
     {
-        return $this->ville->nom. '; Aléa: ' .$this->alea->nom;
+        //return $this->ville->nom. '; Aléa: ' .$this->alea->nom;
     }
 }

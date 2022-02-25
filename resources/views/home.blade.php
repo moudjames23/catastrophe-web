@@ -128,6 +128,19 @@
                                         class="btn-group"
                                     >
 
+                                        <form
+                                            action="{{ route('alertes.destroy', $alerte) }}"
+                                            method="POST"
+                                            onsubmit="return confirm('{{ __('crud.common.are_you_sure') }}')"
+                                        >
+                                            @csrf @method('DELETE')
+                                            <button
+                                                type="submit"
+                                                class="btn btn-light text-danger"
+                                            >
+                                                <i class="icon ion-md-trash"></i>
+                                            </button>
+                                        </form>
 
                                     </div>
                                 </td>

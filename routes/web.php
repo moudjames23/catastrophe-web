@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlerteController;
 use App\Http\Controllers\ExcelCatastropheController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,4 +42,6 @@ Route::prefix('/')
         Route::resource('aleas', AleaController::class);
 
         Route::resource('agents', AgentController::class);
+
+        Route::delete('alertes/{id}', [AlerteController::class, 'destroy'])->name('alertes.destroy');
     });
