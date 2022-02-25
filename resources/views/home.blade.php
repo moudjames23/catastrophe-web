@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+@section('css')
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin="" />
+
+@endsection
+
 @section('content')
     <div class="container">
         <div class="card">
@@ -156,9 +163,8 @@
                 </div>
 
 
-                <div style="width: 500px; height: 500px;">
-                    {!! Mapper::render() !!}
-                </div>
+
+                <div id="map" style="height: 50vh; width: 100vh;"></div>
 
             </div>
         </div>
@@ -167,4 +173,39 @@
 
 
     </div>
+@endsection
+
+@section('js')
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""></script>
+
+    <script>
+
+        var locations = {!! json_encode($data) !!}
+
+        /*var locations = [
+            ["LOCATION_1", 11.8166, 122.0942],
+            ["LOCATION_2", 11.9804, 121.9189],
+            ["LOCATION_3", 10.7202, 122.5621],
+            ["LOCATION_4", 11.3889, 122.6277],
+            ["LOCATION_5", 10.5929, 122.6325]
+        ];*/
+
+        var map = L.map('map').setView([9.934886500000001, -11.283844999999985], 8);
+        mapLink =
+            '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+        L.tileLayer(
+            'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; ' + mapLink + ' Contributors',
+                maxZoom: 18,
+            }).addTo(map);
+
+        for (var i = 0; i < locations.length; i++) {
+            marker = new L.marker([locations[i][1], locations[i][2]])
+                .bindPopup(locations[i][0])
+                .addTo(map);
+        }
+
+    </script>
 @endsection

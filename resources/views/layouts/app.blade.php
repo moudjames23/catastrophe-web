@@ -32,6 +32,8 @@
         </script>
 
 
+        @yield('css')
+
 
         @livewireStyles
     </head>
@@ -61,6 +63,8 @@
             notyf.success('{{ session('success') }}')
         </script>
         @endif
+
+        @yield('js')
 
         <script>
             /* Simple Alpine Image Viewer */

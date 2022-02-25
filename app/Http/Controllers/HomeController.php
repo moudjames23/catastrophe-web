@@ -33,11 +33,13 @@ class HomeController extends Controller
             ->get();
 
 
-        for($i = 0; $i < count($alertes); $i++)
-            Mapper::map($alertes[$i]['latitude'], $alertes[$i]['longitude'], [
-                'zoom' => 15
-            ]);
+        $data = array();
+        foreach ($alertes  as $key => $alerte)
+        {
+            $data[$key] = [$alerte->message, $alerte->latitude, $alerte->longitude];
+        }
 
-        return view('home', compact('alertes'));
+
+        return view('home', compact('alertes', 'data'));
     }
 }
