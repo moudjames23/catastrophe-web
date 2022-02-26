@@ -18,18 +18,6 @@
                     </li>
 
                     <li class="nav-item">
-                        @can('view-any', App\Models\Catastrophe::class)
-                            <a class="nav-link" href="{{ route('catastrophes.index') }}">Catastrophes</a>
-                        @endcan
-                    </li>
-
-                    <li class="nav-item">
-
-                            <a class="nav-link" href="{{ route('agents.index') }}">Agents</a>
-
-                    </li>
-
-                    <li class="nav-item">
                         @can('view-any', App\Models\Alea::class)
                             <a class="nav-link" href="{{ route('aleas.index') }}">Aléas</a>
                         @endcan
@@ -37,9 +25,22 @@
 
                     <li class="nav-item">
                         @can('view-any', App\Models\Ville::class)
-                            <a class="nav-link" href="{{ route('villes.index') }}">Villes</a>
+                            <a class="nav-link" href="{{ route('villes.index') }}">Préfectures</a>
                         @endcan
                     </li>
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="{{ route('agents.index') }}">Agents</a>
+
+                    </li>
+
+                    <li class="nav-item">
+                        @can('view-any', App\Models\Catastrophe::class)
+                            <a class="nav-link" href="{{ route('catastrophes.index') }}">Catastrophes</a>
+                        @endcan
+                    </li>
+
 
                     <li class="nav-item">
                         @can('view-any', App\Models\User::class)

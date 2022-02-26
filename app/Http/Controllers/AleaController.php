@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Alea;
+use App\Models\Alerte;
 use Illuminate\Http\Request;
 use App\Http\Requests\AleaStoreRequest;
 use Illuminate\Support\Facades\Storage;
@@ -68,7 +69,19 @@ class AleaController extends Controller
     {
         $this->authorize('view', $alea);
 
-        return view('app.aleas.show', compact('alea'));
+        $alertes = Alerte::with(['agent', 'alea', 'ville'])
+            ->latest()
+            ->whereAleaId($alea->id)
+            ->get();
+
+        $data = array();
+        foreach ($alertes  as $key => $alerte)
+        {
+            $data[$key] = [$alerte->message, $alerte->latitude, $alerte->longitude];
+        }
+
+
+        return view('app.aleas.show', compact('alea', 'data'));
     }
 
     /**

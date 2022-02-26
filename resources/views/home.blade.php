@@ -5,10 +5,78 @@
           integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
           crossorigin="" />
 
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/drilldown.js"></script>
+
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+
 @endsection
 
 @section('content')
     <div class="container">
+
+        <div class="row w-row">
+            <div class="basic-column w-col w-col-3">
+                <div class="tag-wrapper">
+                    <div class="number-card number-card-content1">
+                        <h1 class="number-card-number">{{ $aleasCount }}</h1>
+                        <div class="number-card-divider"></div>
+                        <div class="number-card-progress-wrapper">
+                            <div class="tagline number-card-currency">Total aléas</div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="basic-column w-col w-col-3">
+                <div class="tag-wrapper">
+                    <div class="number-card number-card-content2">
+                        <h1 class="number-card-number">{{ $alertesCount }}</h1>
+
+                        <div class="number-card-divider"></div>
+                        <div class="number-card-progress-wrapper">
+                            <div class="tagline number-card-currency">Total alertes</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="basic-column w-col w-col-3">
+                <div class="tag-wrapper">
+                    <div class="number-card number-card-content3">
+                        <h1 class="number-card-number">{{ $agentsCount }}</h1>
+
+                        <div class="number-card-divider"></div>
+                        <div class="number-card-progress-wrapper">
+                            <div class="tagline number-card-currency">Total agents</div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="basic-column w-col w-col-3">
+                <div class="tag-wrapper">
+                    <div class="number-card number-card-content4">
+                        <h1 class="number-card-number">{{ $prefecturesCount }}</h1>
+
+                        <div class="number-card-divider"></div>
+                        <div class="number-card-progress-wrapper">
+                            <div class="tagline number-card-currency">Total préfectures</div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
         <div class="card">
             <div class="card-body">
                 <div style="display: flex; justify-content: space-between;">
@@ -55,6 +123,9 @@
                                 Agent
                             </th>
                             <th class="text-left">
+                                Aléa
+                            </th>
+                            <th class="text-left">
                                 Ville
                             </th>
 
@@ -92,6 +163,7 @@
                         @forelse($alertes as $alerte)
                             <tr>
                                 <td>{{ $alerte->agent->name ?? '-' }}</td>
+                                <td>{{ $alerte->alea->nom ?? '-' }}</td>
                                 <td>
                                     {{ $alerte->ville->nom ?? '-' }}
                                 </td>
@@ -172,12 +244,42 @@
         <div class="card">
             <div class="card-body">
                 <div style="display: flex; justify-content: space-between;">
-                    <h4 class="card-title">10 dernières alertes signalées</h4>
+                    <h4 class="card-title">Carte interactive</h4>
                 </div>
 
 
 
                 <div id="map" style="height: 50vh; width: 100vh;"></div>
+
+            </div>
+        </div>
+
+        <br>
+
+        <div class="card">
+            <div class="card-body">
+                <div style="display: flex; justify-content: space-between;">
+                    <h4 class="card-title">Nombre d'alertes par mois</h4>
+                </div>
+
+
+
+                <div id="alerte_per_month"></div>
+
+            </div>
+        </div>
+
+        <br>
+
+        <div class="card">
+            <div class="card-body">
+                <div style="display: flex; justify-content: space-between;">
+                    <h4 class="card-title">Nombre d'alertes remontées par aléa</h4>
+                </div>
+
+
+
+                <div id="alerteByAlea"></div>
 
             </div>
         </div>
@@ -205,13 +307,13 @@
             ["LOCATION_5", 10.5929, 122.6325]
         ];*/
 
-        var map = L.map('map').setView([9.934886500000001, -11.283844999999985], 8);
+        var map = L.map('map').setView([9.934886500000001, -11.283844999999985], 7);
         mapLink =
             '<a href="http://openstreetmap.org">OpenStreetMap</a>';
         L.tileLayer(
             'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; ' + mapLink + ' Contributors',
-                maxZoom: 18,
+                maxZoom: 10,
             }).addTo(map);
 
         for (var i = 0; i < locations.length; i++) {
@@ -219,6 +321,92 @@
                 .bindPopup(locations[i][0])
                 .addTo(map);
         }
+
+        var onlyMonths = {!! json_encode($statAlerteParMoiOnlyMonth) !!};
+        var onlyData = {!! json_encode($statAlerterParMoiOnlyTotal) !!};
+
+        Highcharts.chart('alerte_per_month', {
+            chart: {
+                type: 'spline'
+            },
+            title: {
+                text: 'Tendance sur la remontée des alertes par mois'
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: {
+                categories: onlyMonths
+            },
+            yAxis: {
+                title: {
+                    text: 'Evolution'
+                },
+                labels: {
+                    formatter: function () {
+                        return this.value + '';
+                    }
+                }
+            },
+            tooltip: {
+                crosshairs: true,
+                shared: true
+            },
+            plotOptions: {
+                spline: {
+                    marker: {
+                        radius: 4,
+                        lineColor: '#666666',
+                        lineWidth: 1
+                    }
+                }
+            },
+            series: [{
+                name: '',
+                marker: {
+                    symbol: 'diamond'
+                },
+                data: onlyData
+            }]
+        });
+
+
+        var alertByAlea = {!! json_encode($alerteByAlea) !!};
+
+        Highcharts.chart('alerteByAlea', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: ''
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    }
+                }
+            },
+            series: [{
+                name: 'Brands',
+                colorByPoint: true,
+                data: alertByAlea
+            }]
+        });
 
     </script>
 @endsection

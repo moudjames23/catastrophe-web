@@ -54,6 +54,9 @@
                             <th class="text-left">
                                 @lang('crud.villes.inputs.nom')
                             </th>
+                            <th class="text-left">
+                                Alertes
+                            </th>
                             <th class="text-center">
                                 @lang('crud.common.actions')
                             </th>
@@ -63,6 +66,7 @@
                         @forelse($villes as $ville)
                         <tr>
                             <td>{{ $ville->nom ?? '-' }}</td>
+                            <td>{{ count($ville->alertes) }}</td>
                             <td class="text-center" style="width: 134px;">
                                 <div
                                     role="group"

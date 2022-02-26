@@ -17,4 +17,9 @@ class Alea extends Model
     {
         return $this->hasMany(Catastrophe::class);
     }
+
+    public function alertes()
+    {
+        return $this->hasMany(Alerte::class);
+    }
 }

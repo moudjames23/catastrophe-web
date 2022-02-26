@@ -58,6 +58,9 @@
                                 @lang('crud.aleas.inputs.url')
                             </th>
                             <th class="text-left">
+                                Alertes
+                            </th>
+                            <th class="text-left">
                                 @lang('crud.aleas.inputs.image')
                             </th>
                             <th class="text-center">
@@ -74,6 +77,7 @@
                                     >{{ $alea->url ?? '-' }}</a
                                 >
                             </td>
+                            <td>{{ count($alea->alertes) }}</td>
                             <td>
                                 <x-partials.thumbnail
                                     src="{{ $alea->image ? \Storage::url($alea->image) : '' }}"

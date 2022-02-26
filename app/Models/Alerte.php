@@ -25,8 +25,10 @@ class Alerte extends Model
         return $this->belongsTo('App\Models\Alea');
     }
 
+
+
     public function getMessageAttribute()
     {
-        //return $this->ville->nom. '; Aléa: ' .$this->alea->nom;
+        return $this->ville->nom. '; Aléa: ' .$this->alea->nom;
     }
 }
