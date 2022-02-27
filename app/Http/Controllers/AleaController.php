@@ -6,6 +6,7 @@ use App\Models\Alea;
 use App\Models\Alerte;
 use Illuminate\Http\Request;
 use App\Http\Requests\AleaStoreRequest;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\AleaUpdateRequest;
 
@@ -25,6 +26,7 @@ class AleaController extends Controller
             ->latest()
             ->paginate(5)
             ->withQueryString();
+
 
         return view('app.aleas.index', compact('aleas', 'search'));
     }
@@ -69,19 +71,72 @@ class AleaController extends Controller
     {
         $this->authorize('view', $alea);
 
+
+
+        $search = $request->get('search', '');
+
         $alertes = Alerte::with(['agent', 'alea', 'ville'])
             ->latest()
             ->whereAleaId($alea->id)
+            ->paginate(15)
+            ->withQueryString();
+
+
+        $aleasCount = Alea::whereId($alea->id)
+            ->count();
+
+        $alertesCount = Alerte::whereAleaId($alea->id)
+            ->count();
+
+        $personnesTouchees = Alerte::whereAleaId($alea->id)
+            ->select(DB::raw('SUM(alertes.personnes) as personnes'))
+            ->first();
+
+        $morts = Alerte::whereAleaId($alea->id)
+            ->select(DB::raw('SUM(alertes.mort) as decedes'))
+            ->first();
+
+        // Personnes touchees par prefectures
+
+        $personnes = DB::table('alertes')
+            ->join('villes', 'alertes.ville_id', 'villes.id')
+            ->select(DB::raw('SUM(alertes.personnes) as y'), 'villes.nom as name')
+            ->where('alertes.alea_id', $alea->id)
+            ->groupBy('name')
             ->get();
 
-        $data = array();
-        foreach ($alertes  as $key => $alerte)
+        //Personnes decedees par ville;
+
+        // Nombre d'alertes par mois
+        $alertesDecedeParVille = DB::table("alertes")
+            ->join('villes', 'alertes.ville_id', 'villes.id')
+            ->select(DB::raw('SUM(alertes.mort) as mort'), 'villes.nom as ville')
+            ->where('alertes.alea_id', $alea->id)
+            ->groupBy('ville')
+            ->get();
+
+        $statTotalMort = array();
+        $statTotalVille = array();
+
+        for($i = 0; $i < count($alertesDecedeParVille); $i++)
         {
-            $data[$key] = [$alerte->message, $alerte->latitude, $alerte->longitude];
+
+            $statTotalMort[] = $alertesDecedeParVille[$i]->mort;
+            $statTotalVille[] = $alertesDecedeParVille[$i]->ville;
+
         }
 
 
-        return view('app.aleas.show', compact('alea', 'data'));
+        return view('app.aleas.show', compact( 'alertes',
+            'search',
+            'alea',
+            'aleasCount',
+            'alertesCount',
+            'personnesTouchees',
+            'morts',
+            'personnes',
+            'statTotalMort', 'statTotalVille'
+        ));
     }
 
     /**

@@ -115,6 +115,13 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/sanctum" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/box/spout" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/rap2hpoutre/fast-excel" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ezyang/htmlpurifier" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/maatwebsite/excel" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/markbaker/complex" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/markbaker/matrix" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/myclabs/php-enum" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpoffice/phpspreadsheet" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/maennchen/zipstream-php" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -122,5 +129,7 @@
     <orderEntry type="library" name="leaflet" level="application" />
     <orderEntry type="library" name="ionicons" level="application" />
     <orderEntry type="library" name="alpinejs" level="application" />
+    <orderEntry type="library" name="notyf" level="application" />
+    <orderEntry type="library" name="livewire-turbolinks" level="application" />
   </component>
 </module>

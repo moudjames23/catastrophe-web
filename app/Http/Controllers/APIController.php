@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Agent;
 use App\Models\Alea;
 use App\Models\Alerte;
+use App\Models\SousPrefecture;
 use App\Models\Ville;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,6 +14,42 @@ use function GuzzleHttp\Promise\all;
 
 class APIController extends Controller
 {
+
+    public function login(Request $request)
+    {
+        $identifiant = $request['identifiant'];
+        //$password = $request['password'];
+
+
+        $agent = Agent::where('identifiant', $identifiant)
+            ->first();
+
+        $status = false;
+        $data = array();
+
+        if ($agent != null) {
+            $status = true;
+
+            $villes = Ville::with(['sousPrefectures'])
+                ->select('id', 'nom')
+                ->get();
+
+            $data = [
+                'status' => $status,
+                'id' => $agent->id,
+                'name' => $agent->name,
+                'villes' => $villes
+
+            ];
+        } else
+            $data = [
+                'status' => $status,
+                'message' => "Vos informations sont incorrectes"
+            ];
+
+        return response()->json($data);
+    }
+
     public function home()
     {
         $aleas = Alea::has('catastrophes')
@@ -63,11 +100,13 @@ class APIController extends Controller
     public function sync(Request $request)
     {
         $ville = Ville::whereId($request['ville_id'])->first();
+        $sousPrefecture = SousPrefecture::whereId($request['sous_prefecture_id'])->first();
         $alea = Alea::whereId($request['alea_id'])->first();
         $agent = Agent::whereId($request['agent_id'])->first();
 
         $alerte = new Alerte();
         $alerte->ville_id = $ville->id;
+        $alerte->sous_prefecture = $sousPrefecture->id;
         $alerte->alea_id = $alea->id;
         $alerte->agent_id = $agent->id;
         $alerte->superficie = $request['superficie'];

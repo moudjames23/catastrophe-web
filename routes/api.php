@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('login', [APIController::class, 'login']);
+
 Route::get('home', [APIController::class, 'home']);
 
 Route::get('alea/{id}', [APIController::class, 'alea']);

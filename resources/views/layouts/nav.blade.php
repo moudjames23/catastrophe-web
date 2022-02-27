@@ -18,9 +18,14 @@
                     </li>
 
                     <li class="nav-item">
-                        @can('view-any', App\Models\Alea::class)
+
                             <a class="nav-link" href="{{ route('aleas.index') }}">Aléas</a>
-                        @endcan
+
+                    </li>
+
+                    <li class="nav-item">
+
+                            <a class="nav-link" href="{{ route('alertes.index') }}">Alertes</a>
                     </li>
 
                     <li class="nav-item">

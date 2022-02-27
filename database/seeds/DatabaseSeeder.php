@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Alerte;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,9 +19,12 @@ class DatabaseSeeder extends Seeder
         ]);
         $this->call(PermissionsSeeder::class);
 
+        $this->call(CollectiviteSeeder::class);
+
         $this->call(AleaSeeder::class);
         //$this->call(CatastropheSeeder::class);
         //->call(UserSeeder::class);
-        $this->call(VilleSeeder::class);
+        //$this->call(VilleSeeder::class);
+        $this->call(AlerteSeeder::class);
     }
 }

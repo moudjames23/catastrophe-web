@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateVillesTable extends Migration
+class CreateRegionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateVillesTable extends Migration
      */
     public function up()
     {
-        Schema::create('villes', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('regions', function (Blueprint $table) {
+            $table->id();
             $table->string('nom')->unique();
-            $table->unsignedBigInteger('region_id');
-
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateVillesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('villes');
+        Schema::dropIfExists('regions');
     }
 }

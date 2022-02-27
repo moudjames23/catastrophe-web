@@ -2,6 +2,7 @@
 
 use App\Models\Alea;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class AleaSeeder extends Seeder
 {

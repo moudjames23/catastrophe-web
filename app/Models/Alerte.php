@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\Searchable;
 use Illuminate\Database\Eloquent\Model;
 
 class Alerte extends Model
 {
+    use Searchable;
+
     protected $fillable = ['nom', 'url', 'image'];
 
     protected $searchableFields = ['*'];
@@ -25,10 +28,14 @@ class Alerte extends Model
         return $this->belongsTo('App\Models\Alea');
     }
 
+    public function getTauxAttribute()
+    {
+        return number_format((($this->mort * 100 ) / $this->personnes), 2);
+    }
 
 
     public function getMessageAttribute()
     {
-        return $this->ville->nom. '; Aléa: ' .$this->alea->nom;
+        //return $this->ville->nom. '; Aléa: ' .$this->alea->nom;
     }
 }

@@ -10,6 +10,8 @@ use Cornford\Googlmapper\Facades\MapperFacade as Mapper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use Faker\Factory as Faker;
+
 class HomeController extends Controller
 {
     /**
@@ -31,6 +33,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         $alertes = Alerte::with(['agent', 'alea', 'ville'])
             ->latest()
             ->limit(10)
@@ -38,8 +41,14 @@ class HomeController extends Controller
 
         $aleasCount = Alea::count();
         $alertesCount = Alerte::count();
-        $agentsCount = Agent::count();
-        $prefecturesCount = Ville::count();
+
+        $personnesTouchees = Alerte::select(DB::raw('SUM(alertes.personnes) as personnes'))
+            ->first();
+
+        $morts = Alerte::select(DB::raw('SUM(alertes.mort) as decedes'))
+            ->first();
+
+
 
 
         $data = array();
@@ -50,7 +59,7 @@ class HomeController extends Controller
 
 
         // Nombre d'alertes par mois
-        $alertesPerMonth = Alerte::select(DB::raw("COUNT(*) as total"), DB::raw("DATE_FORMAT(created_at, '%M') as mois"))
+        $alertesPerMonth = Alerte::select(DB::raw("COUNT(*) as total"), DB::raw("DATE_FORMAT(date, '%M') as mois"))
             ->groupBy('mois')
             ->orderByRaw("FIELD(mois,'January','February','March','May', 'June','July','August','September','October','November','December')")
             ->get();
@@ -75,13 +84,29 @@ class HomeController extends Controller
 
 
 
-        //dd($alertesPerMonth);
+       // Personnes touchees par prefectures
+
+        $personnes = DB::table('alertes')
+            ->join('villes', 'alertes.ville_id', 'villes.id')
+            ->select(DB::raw('SUM(alertes.personnes) as y'), 'villes.nom as name')
+            ->groupBy('name')
+            ->get();
+
+        //Personnes decedees par ville;
+
+        $personnesDecedes = DB::table('alertes')
+            ->join('villes', 'alertes.ville_id', 'villes.id')
+            ->select(DB::raw('SUM(alertes.mort) as y'), 'villes.nom as name')
+            ->groupBy('name')
+            ->get();
+
+
 
 
 
         return view('home', compact('alertes', 'data',
-        'aleasCount', 'alertesCount', 'agentsCount', 'prefecturesCount',
+        'aleasCount', 'alertesCount', 'personnesTouchees', 'morts',
         'statAlerteParMoiOnlyMonth', 'statAlerterParMoiOnlyTotal',
-        'alerteByAlea'));
+        'alerteByAlea', 'personnes', 'personnesDecedes'));
     }
 }

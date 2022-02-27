@@ -43,5 +43,9 @@ Route::prefix('/')
 
         Route::resource('agents', AgentController::class);
 
+        Route::get('alertes', [AlerteController::class, 'index'])->name('alertes.index');
+        Route::get('alerte-export', [AlerteController::class, 'export'])->name('alerte.export');
         Route::delete('alertes/{id}', [AlerteController::class, 'destroy'])->name('alertes.destroy');
+
+        Route::get('alea-alerte-expert/{id}', [AlerteController::class, 'aleaAlerteExport'])->name('alea.alerte.export');
     });
