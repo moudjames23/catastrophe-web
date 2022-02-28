@@ -30,12 +30,12 @@ class Alerte extends Model
 
     public function getTauxAttribute()
     {
-        return number_format((($this->mort * 100 ) / $this->personnes), 2);
+        return number_format((($this->mort * 100) / $this->personnes), 2);
     }
 
 
     public function getMessageAttribute()
     {
-        //return $this->ville->nom. '; Aléa: ' .$this->alea->nom;
+        return $this->ville->nom . '; Aléa: ' . $this->alea->nom . ' Personnes: ' . $this->personnes . ' Décédés: ' . $this->mort . " Agent: " . $this->agent->name;
     }
 }

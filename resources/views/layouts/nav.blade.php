@@ -40,11 +40,11 @@
 
                     </li>
 
-                    <li class="nav-item">
+                   {{-- <li class="nav-item">
                         @can('view-any', App\Models\Catastrophe::class)
                             <a class="nav-link" href="{{ route('catastrophes.index') }}">Catastrophes</a>
                         @endcan
-                    </li>
+                    </li>--}}
 
 
                     <li class="nav-item">

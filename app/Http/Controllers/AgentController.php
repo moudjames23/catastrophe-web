@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Agent;
 use App\Models\Alea;
+use App\Osms\Http\SMSClient;
+use App\Osms\SMS;
 use Illuminate\Http\Request;
 
 class AgentController extends Controller
@@ -42,7 +44,7 @@ class AgentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -61,6 +63,11 @@ class AgentController extends Controller
 
         $agent->save();
 
+        $message = "Bonjour " . $agent->name . ', votre identifiant est le ' . $agent->identifiant . '. Téléchargez via ce lien: https://sapguinee.com/apk/sapguinee.apk';
+
+
+        $this->sendSMS($agent->phone, $message);
+
         return redirect()
             ->route('agents.edit', $agent)
             ->withSuccess(__('crud.common.created'));
@@ -69,7 +76,7 @@ class AgentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show(Agent $agent)
@@ -81,7 +88,7 @@ class AgentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit(Agent $agent)
@@ -92,15 +99,15 @@ class AgentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Agent $agent)
     {
         $this->validate($request, [
             'name' => 'required|min:5',
-            'phone' => 'required|min:9|unique:agents,phone,' .$agent->id,
+            'phone' => 'required|min:9|unique:agents,phone,' . $agent->id,
         ]);
 
 
@@ -117,12 +124,14 @@ class AgentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Agent $agent)
     {
-        dd($agent);
+        $agent->delete();
+
+        return redirect(route('agents.index'));
     }
 
     public function identifiantGenerate()
@@ -132,17 +141,51 @@ class AgentController extends Controller
             ->first();
 
 
-
         if ($data == null)
-            $identifiant =  "0" .rand(10, 99) . '' . rand(10, 99);
+            $identifiant = "0" . rand(10, 99) . '' . rand(10, 99);
 
         elseif ($data->id < 10)
-            $identifiant =  ($data->id) .''. rand(1000, 9999) ;
+            $identifiant = ($data->id) . '' . rand(1000, 9999);
 
         else if ($data->id < 100)
-            $identifiant =  ($data->id) .''. rand(100, 999);
+            $identifiant = ($data->id) . '' . rand(100, 999);
 
         return $identifiant;
+
+    }
+
+    public function sendSMS($phone, $message)
+    {
+        $id = "lfVMJnbS0ZGBhxAM4i3UZrbluV5j6v3t";
+        $secret = "ZOA2DjxMFAX1td4i";
+
+        $client = SMSClient::getInstance($id, $secret);
+
+        $token = $client->getToken(); //recuperation du token
+        $expire = $client->getTokenExpiresIn(); // Validite du token, 3600s
+
+
+        $sms = new SMS($client);
+
+        $balance = $sms->realBalance('GIN'); //On recupere le nombre d'sms restant
+
+        if ($balance['available'] != 0) // S'il en reste
+        {
+
+            $from = '+224620000000';
+            $to = '+224' . $phone;
+
+
+            $response = $sms->to($to)
+                ->from($from, 'Kisal')
+                ->message($message)
+                ->send();
+
+            if (isset($response['outboundSMSMessageRequest'])) {
+
+            }
+        }
+
 
     }
 }

@@ -49,6 +49,13 @@ class HomeController extends Controller
             ->first();
 
 
+        $alerteParRegion = DB::table('alertes')
+            ->join('villes', 'alertes.ville_id', 'villes.id')
+            ->join('regions', 'villes.region_id', 'regions.id')
+            ->select(DB::raw('COUNT(alertes.id) as y'), 'regions.nom as name')
+            ->groupBy('name')
+            ->get();
+
 
 
         $data = array();
@@ -107,6 +114,6 @@ class HomeController extends Controller
         return view('home', compact('alertes', 'data',
         'aleasCount', 'alertesCount', 'personnesTouchees', 'morts',
         'statAlerteParMoiOnlyMonth', 'statAlerterParMoiOnlyTotal',
-        'alerteByAlea', 'personnes', 'personnesDecedes'));
+        'alerteByAlea', 'personnes', 'personnesDecedes', 'alerteParRegion'));
     }
 }

@@ -24,7 +24,7 @@ class AleaController extends Controller
 
         $aleas = Alea::search($search)
             ->latest()
-            ->paginate(5)
+            ->paginate(15)
             ->withQueryString();
 
 

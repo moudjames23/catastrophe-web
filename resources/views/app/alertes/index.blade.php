@@ -57,7 +57,7 @@
                                 Aléa
                             </th>
                             <th class="text-left">
-                                Ville
+                                Preéfecture
                             </th>
 
                             <th class="text-left">
@@ -73,7 +73,7 @@
                             </th>
 
                             <th class="text-left">
-                                Personnes touchées
+                                Personnes
                             </th>
 
                             <th class="text-left">
@@ -82,6 +82,10 @@
 
                             <th class="text-left">
                                 Lat / Long
+                            </th>
+
+                            <th class="text-left">
+                                Image
                             </th>
 
 
@@ -120,6 +124,12 @@
 
                                 <td>
                                     {{ $alerte->latitude. ' / ' .$alerte->longitude }}
+                                </td>
+
+                                <td>
+                                    <x-partials.thumbnail
+                                        src="{{ $alerte->image ? \Storage::url($alerte->image) : '' }}"
+                                    />
                                 </td>
 
                                 <td class="text-center" style="width: 134px;">

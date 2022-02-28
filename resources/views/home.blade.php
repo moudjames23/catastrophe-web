@@ -52,7 +52,7 @@
 
                         <div class="number-card-divider"></div>
                         <div class="number-card-progress-wrapper">
-                            <div class="tagline number-card-currency">Touchées</div>
+                            <div class="tagline number-card-currency">Total personnes</div>
 
                         </div>
                     </div>
@@ -66,7 +66,7 @@
 
                         <div class="number-card-divider"></div>
                         <div class="number-card-progress-wrapper">
-                            <div class="tagline number-card-currency">Décédées</div>
+                            <div class="tagline number-card-currency">Total décès</div>
 
                         </div>
                     </div>
@@ -96,12 +96,35 @@
     <br>
     <br>
 
+
+
+    <br>
+    <br>
+
     <div class="container">
+
+
+        <div class="card">
+            <div class="card-body">
+                <div style="">
+                    <h4 class="card-title">Total alertes par région</h4>
+                </div>
+
+
+                <div id="alerte_par_region"></div>
+
+            </div>
+        </div>
+
+        <br>
+        <br>
+
         <div class="">
+
             <div class="card">
                 <div class="card-body">
                     <div style="display: flex; justify-content: space-between;">
-                        <h4 class="card-title">Nombre d'alertes remontées par aléa</h4>
+                        <h4 class="card-title">Pourcentage d'alertes remontées par aléa</h4>
                     </div>
 
 
@@ -111,10 +134,13 @@
             </div>
         </div>
 
+        <br>
+        <br>
+
         <div class="card">
             <div class="card-body">
                 <div style="">
-                    <h4 class="card-title">Total des personnes décédées par aléa</h4>
+                    <h4 class="card-title">Pourcentage des personnes décédées par préfectures</h4>
                 </div>
 
 
@@ -157,10 +183,6 @@
 
         <br>
         <br>
-
-
-
-
 
 
 
@@ -382,6 +404,59 @@
                 colorByPoint: true,
                 data: personnesDecedes
             }]
+        });
+
+        var aleaParRegion = {!! json_encode($alerteParRegion) !!};
+        Highcharts.chart('alerte_par_region', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Alertes reparties par région'
+            },
+            subtitle: {
+                text: ''
+            },
+            accessibility: {
+                announceNewData: {
+                    enabled: true
+                }
+            },
+            xAxis: {
+                type: 'category'
+            },
+            yAxis: {
+                title: {
+                    text: 'Total percent market share'
+                }
+
+            },
+            legend: {
+                enabled: false
+            },
+            plotOptions: {
+                series: {
+                    borderWidth: 0,
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.y:1f}'
+                    }
+                }
+            },
+
+            tooltip: {
+                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:2f}</b><br/>'
+            },
+
+            series: [
+                {
+                    name: "Alertes",
+                    colorByPoint: true,
+                    data: aleaParRegion
+                }
+            ]
+
         });
 
 
