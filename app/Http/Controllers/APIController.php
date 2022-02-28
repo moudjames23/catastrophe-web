@@ -109,7 +109,7 @@ class APIController extends Controller
 
         $alerte = new Alerte();
         $alerte->ville_id = $ville->id;
-        $alerte->sous_prefecture = $sousPrefecture->id;
+        $alerte->sous_prefecture_id = $sousPrefecture->id;
         $alerte->alea_id = $alea->id;
         $alerte->agent_id = $agent->id;
         $alerte->superficie = $request['superficie'];
