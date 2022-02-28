@@ -116,6 +116,7 @@ class APIController extends Controller
         $alerte->date = $request['date'];
         $alerte->localite = $request['localite'];
         $alerte->personnes = $request['personne'];
+        $alerte->mort = $request['mort'];
         $alerte->latitude = $request['latitude'];
         $alerte->longitude = $request['longitude'];
 
