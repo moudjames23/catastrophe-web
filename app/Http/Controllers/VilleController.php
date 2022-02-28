@@ -21,6 +21,7 @@ class VilleController extends Controller
 
         $villes = Ville::search($search)
             ->latest()
+            ->orderBy('nom', 'asc')
             ->paginate(50)
             ->withQueryString();
 

@@ -34,11 +34,14 @@ class APIController extends Controller
                 ->select('id', 'nom')
                 ->get();
 
+            $aleas = Alea::select('id', 'nom')->get();
+
             $data = [
                 'status' => $status,
                 'id' => $agent->id,
                 'name' => $agent->name,
-                'villes' => $villes
+                'villes' => $villes,
+                'aleas' => $aleas,
 
             ];
         } else
