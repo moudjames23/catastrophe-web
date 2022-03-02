@@ -72,7 +72,7 @@
                         @forelse($aleas as $alea)
                         <tr>
                             <td>{{ $alea->nom ?? '-' }}</td>
-                            <td>
+                           <td>
                                 <a target="_blank" href="{{ $alea->url }}"
                                     >{{ $alea->url ?? '-' }}</a
                                 >

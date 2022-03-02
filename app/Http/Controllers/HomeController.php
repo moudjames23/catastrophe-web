@@ -66,9 +66,11 @@ class HomeController extends Controller
 
 
         // Nombre d'alertes par mois
-        $alertesPerMonth = Alerte::select(DB::raw("COUNT(*) as total"), DB::raw("DATE_FORMAT(date, '%M') as mois"))
-            ->groupBy('mois')
-            ->orderByRaw("FIELD(mois,'January','February','March','May', 'June','July','August','September','October','November','December')")
+        $alertesPerMonth = DB::table('alertes')
+            ->join('villes', 'alertes.ville_id', 'villes.id')
+            ->select(DB::raw("COUNT(alertes.id) as total"), 'villes.nom as prefecture')
+            ->groupBy('prefecture')
+           ->orderBy('prefecture', 'asc')
             ->get();
 
         $statAlerteParMoiOnlyMonth = array();
@@ -76,8 +78,8 @@ class HomeController extends Controller
 
         for($i = 0; $i < count($alertesPerMonth); $i++)
         {
-            $statAlerteParMoiOnlyMonth[] = $alertesPerMonth[$i]['mois'];
-            $statAlerterParMoiOnlyTotal[] = $alertesPerMonth[$i]['total'];
+            $statAlerteParMoiOnlyMonth[] = $alertesPerMonth[$i]->prefecture;
+            $statAlerterParMoiOnlyTotal[] = $alertesPerMonth[$i]->total;
         }
 
 

@@ -107,7 +107,7 @@
         <div class="card">
             <div class="card-body">
                 <div style="">
-                    <h4 class="card-title">Total alertes par région</h4>
+                    <h4 class="card-title">Répartition des alertes par Région</h4>
                 </div>
 
 
@@ -140,7 +140,7 @@
         <div class="card">
             <div class="card-body">
                 <div style="">
-                    <h4 class="card-title">Pourcentage des personnes décédées par préfectures</h4>
+                    <h4 class="card-title">Pourcentage de décès par préfecture</h4>
                 </div>
 
 
@@ -156,7 +156,7 @@
         <div class="card">
             <div class="card-body">
                 <div style="">
-                    <h4 class="card-title">Nombre d'alertes par mois</h4>
+                    <h4 class="card-title">Répartition des aléas par préfecture</h4>
                 </div>
 
 
@@ -240,7 +240,7 @@
                 type: 'spline'
             },
             title: {
-                text: 'Tendance sur la remontée des alertes par mois'
+                text: ''
             },
             subtitle: {
                 text: ''
@@ -250,7 +250,7 @@
             },
             yAxis: {
                 title: {
-                    text: 'Evolution'
+                    text: "Nombre d'aléa"
                 },
                 labels: {
                     formatter: function () {
@@ -338,7 +338,7 @@
             },
             yAxis: {
                 title: {
-                    text: 'Total percent market share'
+                    text: 'Personnes touchées'
                 }
 
             },
@@ -412,7 +412,7 @@
                 type: 'column'
             },
             title: {
-                text: 'Alertes reparties par région'
+                text: ''
             },
             subtitle: {
                 text: ''
@@ -427,7 +427,7 @@
             },
             yAxis: {
                 title: {
-                    text: 'Total percent market share'
+                    text: "Nombre d'alertes"
                 }
 
             },

@@ -269,7 +269,7 @@
         <div class="card">
             <div class="card-body">
                 <div style="">
-                    <h4 class="card-title">Total des personnes touchées par préfecture</h4>
+                    <h4 class="card-title">Total des personnes décé</h4>
                 </div>
 
 
