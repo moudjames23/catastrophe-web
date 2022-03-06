@@ -35,7 +35,7 @@
             <div class="basic-column w-col w-col-3">
                 <div class="tag-wrapper">
                     <div class="number-card number-card-content2">
-                        <h1 class="number-card-number">{{ $alertesCount }}</h1>
+                        <h1 class="number-card-number">{{ number_format($alertesCount, 0, ',', ' ') }}</h1>
 
                         <div class="number-card-divider"></div>
                         <div class="number-card-progress-wrapper">
@@ -48,7 +48,7 @@
             <div class="basic-column w-col w-col-3">
                 <div class="tag-wrapper">
                     <div class="number-card number-card-content3">
-                        <h1 class="number-card-number">{{ number_format($personnesTouchees->personnes) }}</h1>
+                        <h1 class="number-card-number">{{ number_format($personnesTouchees->personnes, 0, ',', ' ') }}</h1>
 
                         <div class="number-card-divider"></div>
                         <div class="number-card-progress-wrapper">
@@ -62,7 +62,7 @@
             <div class="basic-column w-col w-col-3">
                 <div class="tag-wrapper">
                     <div class="number-card number-card-content4">
-                        <h1 class="number-card-number">{{ number_format($morts->decedes) }}</h1>
+                        <h1 class="number-card-number">{{ number_format($morts->decedes, 0, ',', ' ') }}</h1>
 
                         <div class="number-card-divider"></div>
                         <div class="number-card-progress-wrapper">

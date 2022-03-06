@@ -26,7 +26,7 @@ class AleaStoreRequest extends FormRequest
     {
         return [
             'nom' => ['required', 'unique:aleas,nom', 'max:255', 'string'],
-            'url' => ['required', 'url'],
+            'url' => ['nullable', 'url'],
             'image' => ['image', 'max:1024'],
         ];
     }

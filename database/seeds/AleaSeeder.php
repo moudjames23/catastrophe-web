@@ -21,16 +21,30 @@ class AleaSeeder extends Seeder
           "Orage",
           "Sécheresse",
           "Feu de brousse",
-          "Glissement",
+          "Glissement de terrain",
+          "Tremblement de terre",
+          "Épidemie",
         ];
 
-        $url = "https://umap.openstreetmap.fr/fr/map/cartes-des-risques_706209";
+        $images = [
+            "public/innondation.jpeg",
+            "public/vent.jpeg",
+            "public/orage.jpeg",
+            "public/secheresse.jpeg",
+            "public/feu.jpeg",
+            "public/glissement.jpeg",
+            "public/tremblement.jpeg",
+            "public/epidemie.jpeg",
+        ];
+
+        //$url = "https://umap.openstreetmap.fr/fr/map/cartes-des-risques_706209";
 
         for ($i = 0; $i < count($data); $i++)
         {
             $alea = new Alea();
             $alea->nom = $data[$i];
-            $alea->url = $url;
+            $alea->image = $images[$i];
+            //$alea->url = $url;
             $alea->save();
         }
     }

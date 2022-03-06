@@ -19,7 +19,7 @@
             value="{{ old('url', ($editing ? $alea->url : '')) }}"
             maxlength="255"
             placeholder="Url"
-            required
+
         ></x-inputs.url>
     </x-inputs.group>
 

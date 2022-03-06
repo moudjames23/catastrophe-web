@@ -19,7 +19,7 @@ class CreateAlertesTable extends Migration
             $table->unsignedBigInteger('alea_id');
             $table->unsignedBigInteger('agent_id');
             $table->unsignedBigInteger('sous_prefecture_id');
-            $table->string('superficie');
+            $table->string('superficie')->nullable();
             $table->date('date');
             $table->string('personnes');
             $table->string('mort')->default(0);
@@ -27,6 +27,7 @@ class CreateAlertesTable extends Migration
             $table->double('latitude');
             $table->double('longitude');
             $table->string('image');
+            $table->string('observation')->nullable();
             $table->timestamps();
         });
     }

@@ -83,7 +83,7 @@
         <div class="card">
             <div class="card-body">
                 <div style="display: flex; justify-content: space-between;">
-                    <h4 class="card-title">Les alertes du {{ $alea->nom }}</h4>
+                    <h4 class="card-title">Les alertes du type <b>{{ $alea->nom }}</b></h4>
                 </div>
 
                 <div class="searchbar mt-4 mb-5">
@@ -181,20 +181,20 @@
                                 </td>
 
                                 <td>
-                                    {{ number_format($alerte->superficie) ?? '-' }}
+                                    {{ number_format($alerte->superficie, 0, ',', ' ') ?? '-' }}
                                 </td>
 
 
                                 <td>
-                                    {{ number_format($alerte->personnes) ?? '-' }}
+                                    {{ number_format($alerte->personnes, 0, ',', ' ') ?? '-' }}
                                 </td>
 
                                 <td>
-                                    {{ number_format($alerte->mort) ?? '-' }}
+                                    {{ number_format($alerte->mort, 0, ',', ' ') ?? '-' }}
                                 </td>
 
                                 <td>
-                                    {{ $alerte->taux. ' %' }}
+                                    {{ number_format($alerte->taux, 2, ',', ' '). ' %' }}
                                 </td>
 
                                 <td>
@@ -269,7 +269,7 @@
         <div class="card">
             <div class="card-body">
                 <div style="">
-                    <h4 class="card-title">Total des personnes décé</h4>
+                    <h4 class="card-title">Total des personnes décédées</h4>
                 </div>
 
 

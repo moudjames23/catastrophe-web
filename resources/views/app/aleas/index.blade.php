@@ -54,9 +54,9 @@
                             <th class="text-left">
                                 @lang('crud.aleas.inputs.nom')
                             </th>
-                            <th class="text-left">
+                           {{-- <th class="text-left">
                                 @lang('crud.aleas.inputs.url')
-                            </th>
+                            </th>--}}
                             <th class="text-left">
                                 Alertes
                             </th>
@@ -72,11 +72,11 @@
                         @forelse($aleas as $alea)
                         <tr>
                             <td>{{ $alea->nom ?? '-' }}</td>
-                           <td>
+                           {{--<td>
                                 <a target="_blank" href="{{ $alea->url }}"
-                                    >{{ $alea->url ?? '-' }}</a
+                                    >Afficher la carte</a
                                 >
-                            </td>
+                            </td>--}}
                             <td>{{ count($alea->alertes) }}</td>
                             <td>
                                 <x-partials.thumbnail

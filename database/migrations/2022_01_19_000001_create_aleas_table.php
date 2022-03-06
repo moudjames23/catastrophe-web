@@ -16,7 +16,7 @@ class CreateAleasTable extends Migration
         Schema::create('aleas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nom')->unique();
-            $table->string('url');
+            $table->string('url')->nullable();
             $table->string('image')->nullable();
 
             $table->timestamps();
