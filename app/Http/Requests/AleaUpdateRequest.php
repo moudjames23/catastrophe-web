@@ -31,7 +31,7 @@ class AleaUpdateRequest extends FormRequest
                 'max:255',
                 'string',
             ],
-            'url' => ['required', 'url'],
+            'url' => ['nullable', 'url'],
             'image' => ['image', 'max:1024'],
         ];
     }
