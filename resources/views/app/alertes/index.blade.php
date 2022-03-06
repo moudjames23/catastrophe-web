@@ -85,6 +85,10 @@
                             </th>
 
                             <th class="text-left">
+                                Observation
+                            </th>
+
+                            <th class="text-left">
                                 Image
                             </th>
 
@@ -124,6 +128,10 @@
 
                                 <td>
                                     {{ $alerte->latitude. ' / ' .$alerte->longitude }}
+                                </td>
+
+                                <td>
+                                    {{ $alerte->observation ?? '-' }}
                                 </td>
 
                                 <td>

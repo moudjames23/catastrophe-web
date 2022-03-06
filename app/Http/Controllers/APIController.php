@@ -118,6 +118,7 @@ class APIController extends Controller
         $alerte->mort = $request['mort'];
         $alerte->latitude = $request['latitude'];
         $alerte->longitude = $request['longitude'];
+        $alerte->observation = $request['observation'];
 
         if ($request->hasFile('image')) {
 
