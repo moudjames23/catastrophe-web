@@ -130,5 +130,7 @@
     <orderEntry type="library" name="alpinejs" level="application" />
     <orderEntry type="library" name="notyf" level="application" />
     <orderEntry type="library" name="livewire-turbolinks" level="application" />
+    <orderEntry type="library" name="leaflet-omnivore" level="application" />
+    <orderEntry type="library" name="leaflet-kmz" level="application" />
   </component>
 </module>

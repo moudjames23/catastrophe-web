@@ -21,11 +21,14 @@ Auth::routes([
     'register' => false
 ]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'DashboardController@index')->name('home');
 
-Route::prefix('/')
+Route::prefix('/admin')
     ->middleware('auth')
     ->group(function () {
+
+        Route::get('/', 'DashboardController@index')->name('home');
+
         Route::resource('roles', 'RoleController');
         Route::resource('permissions', 'PermissionController');
 
@@ -48,4 +51,6 @@ Route::prefix('/')
         Route::delete('alertes/{id}', [AlerteController::class, 'destroy'])->name('alertes.destroy');
 
         Route::get('alea-alerte-expert/{id}', [AlerteController::class, 'aleaAlerteExport'])->name('alea.alerte.export');
+
+        Route::resource('couches', CoucheController::class);
     });

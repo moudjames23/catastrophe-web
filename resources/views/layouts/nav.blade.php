@@ -40,6 +40,12 @@
 
                     </li>
 
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="{{ route('couches.index') }}">Couches</a>
+
+                    </li>
+
                    {{-- <li class="nav-item">
                         @can('view-any', App\Models\Catastrophe::class)
                             <a class="nav-link" href="{{ route('catastrophes.index') }}">Catastrophes</a>
