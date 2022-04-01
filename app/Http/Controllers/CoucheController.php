@@ -51,16 +51,22 @@ class CoucheController extends Controller
     {
         $this->validate($request, [
             'nom' => 'required|min:3|unique:couches',
-            'kml' => 'required'
+            'kml' => 'required',
+            'legende' => 'required|image'
         ]);
 
-       if ($request->hasFile('kml'))
-       {
-           $name = $this->saveFile($request);
 
-          $couche = new Couche();
-          $couche->nom = $request['nom'];
-          $couche->url = $name;
+        $couche = new Couche();
+        $couche->nom = $request['nom'];
+
+       if ($request->hasFile('kml') && $request->hasFile('legende'))
+       {
+           $kml = $this->saveFile($request, $request['kml'], 'kml');
+           $legende = $this->saveFile($request, $request['legende'],'legende');
+
+
+          $couche->url = $kml;
+          $couche->legende = $legende;
           $couche->save();
 
            return redirect()
@@ -120,6 +126,11 @@ class CoucheController extends Controller
             File::delete($file);
         }
 
+        if ($couche->legende)
+        {
+            File::delete(public_path().'/legende/' .$couche->legende);
+        }
+
         $couche->delete();
 
         return redirect()
@@ -127,16 +138,15 @@ class CoucheController extends Controller
             ->withSuccess(__('crud.common.removed'));
     }
 
-    public function saveFile(Request $request)
+
+
+    public function saveFile(Request $request, $file, $path)
     {
-        $file = $request['kml'];
         $extension = $file->getClientOriginalExtension();
 
         $uniqueFileName = str_replace(' ', '-', $request['nom']).'.' .$extension;
 
-
-
-        $file->move(public_path(). '/kml', $uniqueFileName);
+        $file->move(public_path(). '/' .$path, $uniqueFileName);
 
         return $uniqueFileName;
 

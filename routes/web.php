@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AlerteController;
 use App\Http\Controllers\ExcelCatastropheController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index');
+
+Route::get('get-legend/{url}', [HomeController::class, 'legendFromUrl']);
 
 Auth::routes([
     'register' => false
@@ -53,4 +56,6 @@ Route::prefix('/admin')
         Route::get('alea-alerte-expert/{id}', [AlerteController::class, 'aleaAlerteExport'])->name('alea.alerte.export');
 
         Route::resource('couches', CoucheController::class);
+
+
     });

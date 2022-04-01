@@ -34,9 +34,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $layers = Couche::select('id', 'nom', 'url')->get()->toArray();
+        $layers = Couche::select('id', 'nom', 'url', 'legende')
+            ->orderBy('nom', 'asc')
+            ->get()
+            ->toArray();
 
+        //dd($layers);
 
         return view('welcome', compact('layers'));
+    }
+
+    public function legendFromUrl($url)
+    {
+        $couche = Couche::where('url', $url)->first();
+
+        if ($couche != null)
+            return view('legend', compact('couche'));
+
+        return '';
     }
 }

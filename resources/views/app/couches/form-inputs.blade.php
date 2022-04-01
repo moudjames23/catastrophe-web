@@ -22,12 +22,33 @@
                 <input
                     type="file"
                     name="kml"
-                    id="image"
                     @change="fileChosen"
                 />
             </div>
 
-            @error('image') @include('components.inputs.partials.error')
+            @error('kml') @include('components.inputs.partials.error')
+            @enderror
+        </div>
+    </x-inputs.group>
+
+    <x-inputs.group class="col-sm-12">
+        <div>
+            <x-inputs.partials.label
+                name="legende"
+                label="Legende"
+            ></x-inputs.partials.label
+            ><br />
+
+            <div class="mt-2">
+                <input
+                    type="file"
+                    name="legende"
+                    @change="fileChosen"
+                />
+            </div>
+
+
+            @error('legende') @include('components.inputs.partials.error')
             @enderror
         </div>
     </x-inputs.group>

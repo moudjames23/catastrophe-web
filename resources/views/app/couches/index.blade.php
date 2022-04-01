@@ -71,7 +71,7 @@
                                         aria-label="Row Actions"
                                         class="btn-group"
                                     >
-                                        @can('update', $couche)
+                                        {{--@can('update', $couche)
                                             <a href="{{ route('couches.edit', $couche) }}">
                                                 <button
                                                     type="button"
@@ -80,7 +80,8 @@
                                                     <i class="icon ion-md-create"></i>
                                                 </button>
                                             </a>
-                                        @endcan @can('view', $couche)
+                                        @endcan--}}
+                                        {{--@can('view', $couche)
                                             <a href="{{ route('couches.show', $couche) }}">
                                                 <button
                                                     type="button"
@@ -89,7 +90,8 @@
                                                     <i class="icon ion-md-eye"></i>
                                                 </button>
                                             </a>
-                                        @endcan @can('delete', $couche)
+                                        @endcan --}}
+                                        @can('delete', $couche)
                                             <form
                                                 action="{{ route('couches.destroy', $couche) }}"
                                                 method="POST"

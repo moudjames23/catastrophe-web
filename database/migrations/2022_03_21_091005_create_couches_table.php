@@ -17,6 +17,7 @@ class CreateCouchesTable extends Migration
             $table->id();
             $table->string('nom');
             $table->string('url');
+            $table->string('legende')->nullable();
             $table->timestamps();
         });
     }

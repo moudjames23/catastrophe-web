@@ -132,5 +132,6 @@
     <orderEntry type="library" name="livewire-turbolinks" level="application" />
     <orderEntry type="library" name="leaflet-omnivore" level="application" />
     <orderEntry type="library" name="leaflet-kmz" level="application" />
+    <orderEntry type="library" name="jquery-1.7.1" level="application" />
   </component>
 </module>
