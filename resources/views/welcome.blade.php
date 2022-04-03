@@ -39,8 +39,6 @@
             bottom: 0px;
             margin-left: 15px;
             margin-bottom: 15px;
-            height: 100px;
-            width: 100px;
             z-index: 99 !important;
         }
     </style>
