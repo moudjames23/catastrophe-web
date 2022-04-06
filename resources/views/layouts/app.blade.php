@@ -42,7 +42,10 @@
 
     <body>
         <div id="app">
-            @include('layouts.nav')
+            @if(!isset($dashboard))
+                @include('layouts.nav')
+            @endif
+
 
             <main class="py-4">
                 @yield('content')

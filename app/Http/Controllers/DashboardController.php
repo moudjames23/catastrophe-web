@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Alea;
 use App\Models\Alerte;
+use App\Models\Couche;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -100,6 +101,7 @@ class DashboardController extends Controller
             ->select(DB::raw('SUM(alertes.mort) as y'), 'villes.nom as name')
             ->groupBy('name')
             ->get();
+
 
 
 
