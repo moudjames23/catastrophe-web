@@ -4,10 +4,10 @@
     <x-inputs.group class="col-sm-12">
         <x-inputs.text
             name="name"
-            label="Name"
+            label="Nom et prénom"
             value="{{ old('name', ($editing ? $user->name : '')) }}"
             maxlength="255"
-            placeholder="Name"
+            placeholder="Nom et prénom"
             required
         ></x-inputs.text>
     </x-inputs.group>
@@ -15,7 +15,7 @@
     <x-inputs.group class="col-sm-12">
         <x-inputs.email
             name="email"
-            label="Email"
+            label="Adresse email"
             value="{{ old('email', ($editing ? $user->email : '')) }}"
             maxlength="255"
             placeholder="Email"
@@ -26,9 +26,9 @@
     <x-inputs.group class="col-sm-12">
         <x-inputs.password
             name="password"
-            label="Password"
+            label="Mot de passe"
             maxlength="255"
-            placeholder="Password"
+            placeholder="Mot de passe"
             :required="!$editing"
         ></x-inputs.password>
     </x-inputs.group>

@@ -85,7 +85,7 @@
                                         </button>
                                     </a>
                                     @endcan @can('view', $ville)
-                                    <a
+                                    {{--<a
                                         href="{{ route('villes.show', $ville) }}"
                                     >
                                         <button
@@ -94,7 +94,7 @@
                                         >
                                             <i class="icon ion-md-eye"></i>
                                         </button>
-                                    </a>
+                                    </a>--}}
                                     @endcan @can('delete', $ville)
                                     <form
                                         action="{{ route('villes.destroy', $ville) }}"

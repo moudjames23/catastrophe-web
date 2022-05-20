@@ -131,7 +131,7 @@
                                 Agent
                             </th>
                             <th class="text-left">
-                                Ville
+                                Préfecture
                             </th>
 
                             <th class="text-left">
@@ -156,7 +156,7 @@
                             </th>
 
                             <th class="text-left">
-                                Date
+                                Date alerte
                             </th>
 
                             <th class="text-left">
@@ -198,7 +198,7 @@
                                 </td>
 
                                 <td>
-                                    {{ $alerte->date }}
+                                    {{ \Carbon\Carbon::parse($alerte->date)->format('d F Y') }}
                                 </td>
 
                                 <td>

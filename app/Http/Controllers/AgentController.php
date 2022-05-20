@@ -108,11 +108,15 @@ class AgentController extends Controller
         $this->validate($request, [
             'name' => 'required|min:5',
             'phone' => 'required|min:9|unique:agents,phone,' . $agent->id,
+            'identifiant' => 'required|min:5|unique:agents,identifiant,' . $agent->id,
         ]);
 
 
         $agent->name = $request['name'];
         $agent->phone = $request['phone'];
+        if (isset($request['identifiant']))
+            $agent->identifiant = $request['identifiant'];
+
 
         $agent->save();
 

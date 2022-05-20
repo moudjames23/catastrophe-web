@@ -23,5 +23,19 @@
         ></x-inputs.text>
     </x-inputs.group>
 
+    @if($editing)
+
+        <x-inputs.group class="col-sm-12">
+            <x-inputs.text
+                name="identifiant"
+                label="identifiant"
+                value="{{ old('identifiant', ($editing ? $agent->identifiant : '')) }}"
+                maxlength="255"
+                placeholder="Identifiant"
+                required
+            ></x-inputs.text>
+        </x-inputs.group>
+    @endif
+
 
 </div>

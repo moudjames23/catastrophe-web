@@ -8,7 +8,7 @@
                 <a href="{{ route('agents.index') }}" class="mr-4"
                     ><i class="icon ion-md-arrow-back"></i
                 ></a>
-                @lang('crud.agents.create_title')
+                Nouvel Agent
             </h4>
 
             <x-form

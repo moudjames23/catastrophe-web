@@ -192,7 +192,8 @@
     const overlayers = {}
 
 
-    L.control.layers(baseLayers, overlayers).addTo(map);
+    L.control.layers(baseLayers, overlayers)
+        .addTo(map);
 
     var legend = L.control({
         position: 'bottomleft'
@@ -203,7 +204,8 @@
     // Add remote KMZ files as layers (NB if they are 3rd-party servers, they MUST have CORS enabled)
 
 
-    var control = L.control.layers(null, null, {collapsed: true}).addTo(map);
+    var control = L.control.layers(null, null, {collapsed: true})
+        .addTo(map);
 
     map.on('overlayadd', function (e) {
        updateLegende(e.name)

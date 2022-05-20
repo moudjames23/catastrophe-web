@@ -57,7 +57,7 @@
                                 Aléa
                             </th>
                             <th class="text-left">
-                                Preéfecture
+                                Préfecture
                             </th>
 
                             <th class="text-left">
@@ -69,7 +69,7 @@
                             </th>
 
                             <th class="text-left">
-                                Date
+                                Date Alerte
                             </th>
 
                             <th class="text-left">
@@ -77,7 +77,7 @@
                             </th>
 
                             <th class="text-left">
-                                Date
+                                Date Synchr.
                             </th>
 
                             <th class="text-left">
@@ -123,7 +123,7 @@
                                 </td>
 
                                 <td>
-                                   {{ $alerte->date }}
+                                   {{ \Carbon\Carbon::parse($alerte->date)->format('d F Y H:i') }}
                                 </td>
 
                                 <td>
