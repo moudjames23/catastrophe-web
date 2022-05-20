@@ -98,13 +98,17 @@ class UserController extends Controller
     {
         $this->authorize('update', $user);
 
+
         $validated = $request->validated();
 
-        if (empty($validated['password'])) {
+        if (!empty($request['password']))
+            $user->password = \Hash::make($request['password']);
+
+        /*if (empty($validated['password'])) {
             unset($validated['password']);
         } else {
             $validated['password'] = Hash::make($validated['password']);
-        }
+        }*/
 
         $user->update($validated);
 
