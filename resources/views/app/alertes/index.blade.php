@@ -115,7 +115,7 @@
                                 </td>
 
                                 <td>
-                                    {{ $alerte->date ?? '-' }}
+                                    {{ \Carbon\Carbon::parse($alerte->date)->format('d F Y') ?? '-' }}
                                 </td>
 
                                 <td>
@@ -123,7 +123,7 @@
                                 </td>
 
                                 <td>
-                                   {{ \Carbon\Carbon::parse($alerte->date)->format('d F Y H:i') }}
+                                   {{ \Carbon\Carbon::parse($alerte->created_at)->format('d F Y H:i') }}
                                 </td>
 
                                 <td>

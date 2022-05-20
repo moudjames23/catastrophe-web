@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-body">
             <div style="display: flex; justify-content: space-between;">
-                <h4 class="card-title">@lang('crud.villes.index_title')</h4>
+                <h4 class="card-title">Liste des préfectures</h4>
             </div>
 
             <div class="searchbar mt-4 mb-5">
@@ -40,7 +40,7 @@
                             class="btn btn-primary"
                         >
                             <i class="icon ion-md-add"></i>
-                            @lang('crud.common.create')
+                           Ajouter
                         </a>
                         @endcan
                     </div>
@@ -52,13 +52,13 @@
                     <thead>
                         <tr>
                             <th class="text-left">
-                                @lang('crud.villes.inputs.nom')
+                                Préfecture
                             </th>
                             <th class="text-left">
                                 Alertes
                             </th>
                             <th class="text-center">
-                                @lang('crud.common.actions')
+                                Actions
                             </th>
                         </tr>
                     </thead>
