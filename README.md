@@ -24,11 +24,17 @@ cd [NOM_DOSSIER]/catastrophe-web
 ```
 composer update
 ```
-4. Generer la clé:
+
+4. Créer le fichier .env
+
+```
+cp  .env.example .env
+```
+5. Generer la clé:
 ```
 php artisan key:generate
 ```
-5. Connexion à la base de données:
+6. Connexion à la base de données:
 ```
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -38,12 +44,18 @@ DB_USERNAME=USERNAME
 DB_PASSWORD=MOT_DE_PASSE
 ```
 
-6. Migrer les tables
+7. Migrer les tables
 ```
 php artisan migrate
 ```
 
-7. Initiliaser les donnees:
+8. Initiliaser les donnees:
 ```
 php artisan  db:seed
+```
+
+9. Lancer le server
+
+```
+php artisan serve
 ```
